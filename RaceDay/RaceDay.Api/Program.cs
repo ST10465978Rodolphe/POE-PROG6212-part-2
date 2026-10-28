@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RaceDay.Api.Data;
+using RaceDay.Api.Services; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,9 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
 });
+
+// Azure Blob Storage for image uploads (the service is only created when an upload endpoint is used)
+builder.Services.AddSingleton<IImageStorageService, AzureBlobImageService>();
 
 var app = builder.Build();
 
