@@ -1,3 +1,5 @@
+using RaceDay.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +20,9 @@ builder.Services.AddHttpClient("RaceDayApi", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"]!);
 });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ApiClient>();
 
 var app = builder.Build();
 
