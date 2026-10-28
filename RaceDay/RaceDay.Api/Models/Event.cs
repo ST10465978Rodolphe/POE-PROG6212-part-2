@@ -13,6 +13,9 @@ public class Event
     public decimal Distance { get; set; }
     public string EventType { get; set; } = string.Empty;
 
+
+    public string? BannerUrl { get; set; }
+
     public List<Category> Categories { get; set; } = new();
     public EventRoute? Route { get; set; }
 }

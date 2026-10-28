@@ -53,6 +53,7 @@ public class ProfileDto
     public string Email { get; set; } = string.Empty;
     public string Role { get; set; } = string.Empty;
     public string? Phone { get; set; }
+    public string? ProfilePictureUrl { get; set; }
 }
 
 public class UpdateProfileRequest
@@ -104,6 +105,7 @@ public class EventDto
     public string Location { get; set; } = string.Empty;
     public decimal Distance { get; set; }
     public string EventType { get; set; } = string.Empty;
+    public string? BannerUrl { get; set; }
 }
 
 // ---------- Categories ----------
@@ -215,4 +217,10 @@ public class RouteDto
     public string StartLocation { get; set; } = string.Empty;
     public string FinishLocation { get; set; } = string.Empty;
     public decimal Distance { get; set; }
+}
+
+// ---------- Uploads ----------
+public class UploadResponse
+{
+    public string Url { get; set; } = string.Empty;
 }

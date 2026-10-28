@@ -13,6 +13,9 @@ public class AppUser
     public string Role { get; set; } = string.Empty;
     public string? Phone { get; set; }
 
+    
+    public string? ProfilePictureUrl { get; set; }
+
     public List<Event> Events { get; set; } = new();
     public List<Enrolment> Enrolments { get; set; } = new();
 }

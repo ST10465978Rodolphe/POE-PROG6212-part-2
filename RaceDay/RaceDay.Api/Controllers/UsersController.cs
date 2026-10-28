@@ -70,6 +70,7 @@ public class UsersController : ControllerBase
         LastName = user.LastName,
         Email = user.Email,
         Role = user.Role,
-        Phone = user.Phone
+        Phone = user.Phone,
+        ProfilePictureUrl = user.ProfilePictureUrl
     };
 }

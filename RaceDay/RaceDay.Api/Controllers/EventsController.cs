@@ -227,6 +227,7 @@ public class EventsController : ControllerBase
         EventDate = e.EventDate,
         Location = e.Location,
         Distance = e.Distance,
-        EventType = e.EventType
+        EventType = e.EventType,
+        BannerUrl = e.BannerUrl
     };
-}
+} 
