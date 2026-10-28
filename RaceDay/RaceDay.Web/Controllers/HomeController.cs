@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RaceDay.Web.Filters;
 using RaceDay.Web.Models;
 using System.Diagnostics;
 
@@ -11,6 +12,7 @@ namespace RaceDay.Web.Controllers
             return View();
         }
 
+        [RequireLogin]
         public IActionResult Privacy()
         {
             return View();
