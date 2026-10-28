@@ -91,7 +91,7 @@ POE-PROG6212-part-1
 
 ### How to Run the API
 ```bash
-git clone <YOUR_REPO_URL>
+git clone <(https://github.com/ST10465978Rodolphe/POE-PROG6212-part-2.git)>
 cd POE-PROG6212-part-1
 dotnet run --project RaceDay/RaceDay.Api
 ```
@@ -174,11 +174,11 @@ The Part 1 workflow (`part1-ci.yml`) keeps validating the `/docs` folder.
 
 ### GitHub Actions Screenshot
 
-![CI/CD green build for Part 2](docs/ci-success-part2.png)
+![CI/CD green build for Part 2](docs/ci-success-part2.PNG)
 
 ### Video Presentation
 
 Unlisted YouTube video demonstrating the running API, the code structure, authentication,
 Swagger and the unit tests:
 
-[Insert your Part 2 YouTube link here]
+(https://youtu.be/A3KobKJcdcM)
