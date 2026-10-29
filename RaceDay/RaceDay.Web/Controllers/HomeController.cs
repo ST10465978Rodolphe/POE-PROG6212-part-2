@@ -1,27 +1,31 @@
-using Microsoft.AspNetCore.Mvc;
-using RaceDay.Web.Filters;
-using RaceDay.Web.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using RaceDay.Web.Models;
+using RaceDay.Web.Services;
 
-namespace RaceDay.Web.Controllers
+namespace RaceDay.Web.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    // Visitors see the public landing page.
+    // Logged-in users are sent straight to the home page of their own role.
+    public IActionResult Index()
     {
-        public IActionResult Index()
+        var session = HttpContext.Session;
+
+        if (session.IsLoggedIn())
         {
-            return View();
+            return session.GetRole() == "Organiser"
+                ? RedirectToAction("Dashboard", "Organiser")
+                : RedirectToAction("Events", "Participant");
         }
 
-        [RequireLogin]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        return View();
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

@@ -1,89 +1,99 @@
-﻿@using RaceDay.Web.Services @ {
+﻿@using RaceDay.Web.Services
+@{
     var session = Context.Session;
     bool loggedIn = session.IsLoggedIn();
     string role = session.GetRole();
-    string ? controller = ViewContext.RouteData.Values["controller"]?.ToString();
-    string ? action = ViewContext.RouteData.Values["action"]?.ToString();
-    // Marks the menu link of the page the user is on string Active(string c, string a) => string.Equals(controller, c, StringComparison.OrdinalIgnoreCase) && string.Equals(action, a, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    string? controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    string? action = ViewContext.RouteData.Values["action"]?.ToString();
+    string Active(string c, string a) => string.Equals(controller, c, StringComparison.OrdinalIgnoreCase) && string.Equals(action, a, StringComparison.OrdinalIgnoreCase) ? "active" : "";
     bool fullWidth = ViewData["FullWidth"] is true;
 }
-
-<!DOCTYPE html >
-<html lang="en" >
-<head >
-<meta charset="utf-8" / >
-<meta name="viewport" content="width=device-width, initial-scale=1.0" / >
-<title > @ViewData["Title"] - RaceDay</title >
-<link rel="preconnect" href="https://fonts.googleapis.com" / >
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin / >
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" / >
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" / >
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" / >
-</head >
-<body >
-<header >
-<nav class="navbar navbar-expand-lg navbar-dark rd-navbar" >
-<div class="container" >
-<a class="navbar-brand rd-brand" asp-controller="Home" asp-action="Index" > RACE<span > DAY</span > </a >
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" >
-<span class="navbar-toggler-icon" > </span >
-</button >
-
-<div class="collapse navbar-collapse" id="mainNav" >
-<ul class="navbar-nav me-auto" >
-@if (loggedIn && role == "Organiser") {
-    <li class="nav-item"> <a class="nav-link @Active("Organiser", "Dashboard")" asp-controller="Organiser" asp-action="Dashboard">Dashboard</a> </li> <li class="nav-item"> <a class="nav-link @Active("Organiser", "Events")" asp-controller="Organiser" asp-action="Events">My Events</a> </li>
-}
-
-else if (loggedIn && role == "Participant") {
-    <li class="nav-item"> <a class="nav-link @Active("Participant", "Events")" asp-controller="Participant" asp-action="Events">Browse Events</a> </li> <li class="nav-item"> <a class="nav-link @Active("Participant", "MyEvents")" asp-controller="Participant" asp-action="MyEvents">My Events</a> </li> <li class="nav-item"> <a class="nav-link @Active("Participant", "MyResults")" asp-controller="Participant" asp-action="MyResults">My Results</a> </li>
-}
-
-</ul >
-
-<ul class="navbar-nav align-items-lg-center" >
-@if (loggedIn) {
-    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> @session.GetFullName() <span class="role-pill">@role</span> </a> <ul class="dropdown-menu dropdown-menu-end"> <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">My Profile</a></li> <li><hr class="dropdown-divider" /></li> <li> <form asp-controller="Account" asp-action="Logout" method="post"> <button type="submit" class="dropdown-item">Log out</button> </form> </li> </ul> </li>
-}
-
-else {
-    <li class="nav-item"> <a class="nav-link @Active("Account", "Login")" asp-controller="Account" asp-action="Login">Log in</a> </li> <li class="nav-item ms-lg-2"> <a class="btn btn-primary btn-sm" asp-controller="Account" asp-action="Register">Register</a> </li>
-}
-
-</ul >
-</div >
-</div >
-</nav >
-</header >
-
-<main role="main" >
-<div class="container pt-3" >
-@if (TempData["Success"] is string successMessage) {
-    <div class="alert alert-success alert-dismissible fade show" role="alert"> @successMessage <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>
-}
-
-@if (TempData["Error"] is string errorMessage) {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert"> @errorMessage <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>
-}
-
-</div >
-
-<div class="@(fullWidth ? "" : "container pb-5")" >
-@RenderBody()
-</div >
-</main >
-
-<footer class="rd-footer" >
-<div class="container" >
-<span class="rd-brand" > RACE<span > DAY</span > </span >
-<span class="ms-2" > Road running, walking and cycling events across South Africa. &copy; @DateTime.Now.Year</span >
-</div >
-</footer >
-
-<script src="~/lib/jquery/dist/jquery.min.js" > </script >
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" > </script >
-<script src="~/js/site.js" asp-append-version="true" > </script >
-@await RenderSectionAsync("Scripts", required: false)
-</body >
-</html >
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RaceDay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark rd-navbar">
+            <div class="container">
+                <a class="navbar-brand rd-brand" asp-controller="Home" asp-action="Index">RACE<span>DAY</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto">
+                        @if (loggedIn && role == "Organiser") {
+                            <li class="nav-item"><a class="nav-link @Active("Organiser", "Dashboard")" asp-controller="Organiser" asp-action="Dashboard">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link @Active("Organiser", "Events")" asp-controller="Organiser" asp-action="Events">My Events</a></li>
+                        }
+                        else if (loggedIn && role == "Participant") {
+                            <li class="nav-item"><a class="nav-link @Active("Participant", "Events")" asp-controller="Participant" asp-action="Events">Browse Events</a></li>
+                            <li class="nav-item"><a class="nav-link @Active("Participant", "MyEvents")" asp-controller="Participant" asp-action="MyEvents">My Events</a></li>
+                            <li class="nav-item"><a class="nav-link @Active("Participant", "MyResults")" asp-controller="Participant" asp-action="MyResults">My Results</a></li>
+                        }
+                    </ul>
+                    <ul class="navbar-nav align-items-lg-center">
+                        @if (loggedIn) {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @session.GetFullName() <span class="role-pill">@role</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">My Profile</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post">
+                                            <button type="submit" class="dropdown-item">Log out</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else {
+                            <li class="nav-item"><a class="nav-link @Active("Account", "Login")" asp-controller="Account" asp-action="Login">Log in</a></li>
+                            <li class="nav-item ms-lg-2"><a class="btn btn-primary btn-sm" asp-controller="Account" asp-action="Register">Register</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <div class="container pt-3">
+            @if (TempData["Success"] is string successMessage) {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @successMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["Error"] is string errorMessage) {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @errorMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        </div>
+        <div class="@(fullWidth ? "" : "container pb-5")">
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="rd-footer">
+        <div class="container">
+            <span class="rd-brand">RACE<span>DAY</span></span>
+            <span class="ms-2">Road running, walking and cycling events across South Africa. &copy; @DateTime.Now.Year</span>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
