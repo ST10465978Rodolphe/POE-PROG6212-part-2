@@ -1,31 +1,266 @@
+/* =====================================================
+   RaceDay brand theme
+   One place for every colour and font, so all pages match.
+   ===================================================== */
+
+:root {
+    --rd-navy: #0d1b2a;
+    --rd-navy-soft: #1b2b40;
+    --rd-orange: #ff5a1f;
+    --rd-orange-dark: #e04a12;
+    --rd-bg: #f4f6f9;
+    --rd-text: #1c2733;
+    --rd-muted: #66727f;
+    --rd-border: #dde3ea;
+    --rd-green: #1e9e5a;
+    --rd-green-soft: #dff5e8;
+    --rd-amber: #b97800;
+    --rd-amber-soft: #fff1cc;
+    --rd-red: #c63a3a;
+    --rd-red-soft: #fde4e4;
+}
+
+/* ---------- Base ---------- */
+
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    font-size: 15px;
 }
 
 body {
-  margin-bottom: 60px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--rd-bg);
+    color: var(--rd-text);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+main {
+    flex: 1;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+h1, h2, h3, h4, .page-title, .card-heading, .rd-brand, .hero-title {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
+
+.page-title {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+a {
+    color: var(--rd-orange-dark);
+}
+
+    a:hover {
+        color: var(--rd-orange);
+    }
+
+/* ---------- Navbar ---------- */
+
+.rd-navbar {
+    background-color: var(--rd-navy);
+    border-bottom: 3px solid var(--rd-orange);
+}
+
+.rd-brand {
+    font-size: 1.7rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+    .rd-brand span {
+        color: var(--rd-orange);
+    }
+
+.rd-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+    .rd-navbar .nav-link:hover,
+    .rd-navbar .nav-link.active {
+        color: #fff;
+    }
+
+    .rd-navbar .nav-link.active {
+        box-shadow: inset 0 -3px 0 var(--rd-orange);
+    }
+
+.role-pill {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background-color: var(--rd-orange);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ---------- Buttons and forms ---------- */
+
+.btn-primary {
+    background-color: var(--rd-orange);
+    border-color: var(--rd-orange);
+    color: #fff;
+    font-weight: 600;
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: var(--rd-orange-dark) !important;
+        border-color: var(--rd-orange-dark) !important;
+        color: #fff;
+    }
+
+.btn-outline-primary {
+    color: var(--rd-orange-dark);
+    border-color: var(--rd-orange);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--rd-orange);
+        border-color: var(--rd-orange);
+        color: #fff;
+    }
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--rd-orange);
+    box-shadow: 0 0 0 0.2rem rgba(255, 90, 31, 0.2);
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+/* ---------- Cards ---------- */
+
+.rd-card {
+    background-color: #fff;
+    border: 1px solid var(--rd-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(13, 27, 42, 0.05);
+}
+
+.rd-card-dark {
+    background-color: var(--rd-navy);
+    border-color: var(--rd-navy);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.card-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+a.rd-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    a.rd-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(13, 27, 42, 0.12);
+    }
+
+/* ---------- Tables ---------- */
+
+.table thead th {
+    background-color: var(--rd-navy);
+    color: #fff;
+    border-color: var(--rd-navy);
+    font-weight: 600;
+}
+
+.table {
+    background-color: #fff;
+}
+
+/* ---------- Status badges (colour coded) ---------- */
+
+.status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-confirmed {
+    background-color: var(--rd-green-soft);
+    color: var(--rd-green);
+}
+
+.status-pending {
+    background-color: var(--rd-amber-soft);
+    color: var(--rd-amber);
+}
+
+.status-cancelled {
+    background-color: var(--rd-red-soft);
+    color: var(--rd-red);
+}
+
+/* ---------- Landing page hero ---------- */
+
+.hero {
+    padding: 5rem 0;
+    color: #fff;
+    background: linear-gradient(120deg, rgba(13, 27, 42, 0.95) 0%, rgba(13, 27, 42, 0.8) 55%, rgba(255, 90, 31, 0.9) 100%);
+    /* To use a photo: save one as wwwroot/images/hero.jpg, then replace the line above with
+       background: linear-gradient(120deg, rgba(13, 27, 42, 0.92) 0%, rgba(13, 27, 42, 0.75) 55%, rgba(255, 90, 31, 0.85) 100%),
+                   url('/images/hero.jpg') center / cover no-repeat; */
+}
+
+.hero-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    color: #ffd2c0;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.hero-text {
+    max-width: 38rem;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+/* ---------- Event banners (used on later pages) ---------- */
+
+.event-banner {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 0.75rem 0.75rem 0 0;
+    background: linear-gradient(120deg, var(--rd-navy), var(--rd-navy-soft));
+}
+
+/* ---------- Footer ---------- */
+
+.rd-footer {
+    background-color: var(--rd-navy);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 1.2rem 0;
+    font-size: 0.9rem;
+}
+
+    .rd-footer .rd-brand {
+        font-size: 1.3rem;
+    }
